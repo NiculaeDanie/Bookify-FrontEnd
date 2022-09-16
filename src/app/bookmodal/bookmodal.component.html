@@ -1,0 +1,32 @@
+<div class="row pad">
+    <div class="col-lg-4 col-md-5 col-sm-12">
+      <img class="image" [src]="this.file"/>
+    </div>
+    <div class="col-lg-8 col-md-7 col-sm-12 padr">
+      <h1>{{book?.title}}</h1>
+
+         <p>Authors: {{getAuthors(book)}}</p><br>
+         <p>Genres: {{getGenres(book)}}</p><br>
+         <p>Release Date: {{book!.releaseDate | date:'shortDate'}}</p>
+         <p>Summary: {{book?.description}}</p>
+        <div class="container">
+          <button [routerLink]="['/book/content',this.bookid]" class="btn btn-primary">Read Book</button>
+
+          <div *ngIf="!book?.isFavorited">
+            <button (click)="addBookToFavorites()" class="btn btn-secondary">Add Book to Favorites</button>
+          </div>
+          <div *ngIf="book?.isFavorited">
+            <button (click)="removeBookFromFavorites()" class="btn btn-secondary">Remove from Favorites</button>
+          </div>
+        </div>
+          
+        </div>
+      </div>
+
+
+
+
+
+
+         
+
