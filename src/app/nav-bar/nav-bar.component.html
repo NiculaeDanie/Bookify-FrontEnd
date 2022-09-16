@@ -12,7 +12,7 @@
                matInput
                [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete">
-          <mat-option [routerLink]="['/'+option.type.toLowerCase(),option.id]" *ngFor="let option of search" [value]="option.title">
+          <mat-option [routerLink]="['/',option.type.toLowerCase(),option.id]" *ngFor="let option of search" [value]="option.title">
             <a>{{option.title}}</a>
           </mat-option>
         </mat-autocomplete>

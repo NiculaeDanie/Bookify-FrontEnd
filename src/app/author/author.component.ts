@@ -6,11 +6,11 @@ import { Author } from '../Dtos/Author';
 import { Genre } from '../Dtos/Genre';
 
 @Component({
-  selector: 'app-authormodal',
-  templateUrl: './authormodal.component.html',
-  styleUrls: ['./authormodal.component.css']
+  selector: 'app-author',
+  templateUrl: './author.component.html',
+  styleUrls: ['./author.component.css']
 })
-export class AuthormodalComponent implements OnInit {
+export class AuthorComponent implements OnInit {
   authorid?: number;
   author?: Author;
   genre?: Genre ;

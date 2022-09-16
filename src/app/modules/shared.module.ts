@@ -8,7 +8,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { AppRoutingModule } from '../app-routing.module';
 import { CarouselComponent } from '../home/carousel/carousel.component';
 import { HomeComponent } from '../home/home.component';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
@@ -19,30 +18,23 @@ import { TitlePipe } from '../pipes/title.pipe';
   imports: [
     CommonModule, 
     RouterModule, 
-    HttpClientModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
     MatToolbarModule,
     MatInputModule,
     MatFormFieldModule,
     MatAutocompleteModule,
-    HttpClientModule,
-    PdfViewerModule],
+    PdfViewerModule
+],
   exports: [
     CommonModule,
     RouterModule,
-    HttpClientModule,
     CarouselComponent,
-     NavBarComponent,
-     HomeComponent,
-     TitlePipe,
-     AppRoutingModule,
-    BrowserAnimationsModule,
+    NavBarComponent,
+    HomeComponent,
+    TitlePipe,
     MatToolbarModule,
     MatInputModule,
     MatFormFieldModule,
     MatAutocompleteModule,
-    HttpClientModule,
     PdfViewerModule
   ],
   declarations: [CarouselComponent, NavBarComponent,HomeComponent,TitlePipe]
