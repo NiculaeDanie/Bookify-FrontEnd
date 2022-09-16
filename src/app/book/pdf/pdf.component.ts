@@ -1,16 +1,16 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { BookifyService } from '../bookify.service';
-import { Book } from '../Dtos/Book';
+import { BookifyService } from '../../bookify.service';
+import { Book } from '../../Dtos/Book';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 declare var $: any;
 @Component({
-  selector: 'app-pdfmodal',
-  templateUrl: './pdfmodal.component.html',
-  styleUrls: ['./pdfmodal.component.css']
+  selector: 'app-pdf',
+  templateUrl: './pdf.component.html',
+  styleUrls: ['./pdf.component.css']
 })
-export class PdfmodalComponent implements OnInit {
+export class PdfComponent implements OnInit {
   bookid?: number;
   book?: Book;
   file?: SafeResourceUrl;

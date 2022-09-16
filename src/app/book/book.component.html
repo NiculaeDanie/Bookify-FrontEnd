@@ -10,7 +10,7 @@
          <p>Release Date: {{book!.releaseDate | date:'shortDate'}}</p>
          <p>Summary: {{book?.description}}</p>
         <div class="container">
-          <button [routerLink]="['/book/content',this.bookid]" class="btn btn-primary">Read Book</button>
+          <button [routerLink]="['/book',this.bookid,'content']" class="btn btn-primary">Read Book</button>
 
           <div *ngIf="!book?.isFavorited">
             <button (click)="addBookToFavorites()" class="btn btn-secondary">Add Book to Favorites</button>
@@ -22,11 +22,3 @@
           
         </div>
       </div>
-
-
-
-
-
-
-         
-

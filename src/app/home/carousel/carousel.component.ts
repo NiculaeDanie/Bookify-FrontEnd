@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { BookifyService } from '../../bookify.service';
 import { Book } from '../../Dtos/Book';
 import { Genre } from '../../Dtos/Genre';
@@ -15,6 +15,7 @@ export class CarouselComponent implements OnInit {
   books: Book[]=[];
   map = new Map<number , SafeResourceUrl>();
   @Input() genre!: Genre;
+  @Output() id= new EventEmitter<number>();
   slides:any= [ [] ];
   visibleDays:number = 5;
 
@@ -144,6 +145,8 @@ export class CarouselComponent implements OnInit {
       });
         return result.slice(0,-1);
       }
-    
+    public emitId(id: number){
+      this.id.emit(id);
+    }
 
 }

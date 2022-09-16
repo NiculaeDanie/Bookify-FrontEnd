@@ -1,9 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { BookifyService } from '../bookify.service';
-import { Book } from '../Dtos/Book';
+import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { BookifyService } from '../bookify.service';;
 import { Genre } from '../Dtos/Genre';
 import { User } from '../Dtos/User';
+import { CarouselComponent } from './carousel/carousel.component';
 declare var $: any;
 
 @Component({
@@ -38,6 +38,12 @@ export class HomeComponent implements OnInit {
         }
       )
     }
-    
+  @ViewChildren(CarouselComponent) child!: CarouselComponent;
+  ngAfterViewInit() {
+    console.log(this.child!);
+  }
+  public getId(id: number){
+    alert(id);
+  }
   
 }

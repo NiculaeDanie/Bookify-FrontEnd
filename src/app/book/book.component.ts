@@ -7,11 +7,11 @@ import { switchMap } from 'rxjs/operators';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-bookmodal',
-  templateUrl: './bookmodal.component.html',
-  styleUrls: ['./bookmodal.component.css']
+  selector: 'app-book',
+  templateUrl: './book.component.html',
+  styleUrls: ['./book.component.css']
 })
-export class BookmodalComponent implements OnInit {
+export class BookComponent implements OnInit {
   bookid?: number;
   book?: Book;
   file?: SafeResourceUrl;
