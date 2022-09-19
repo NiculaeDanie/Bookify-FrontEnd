@@ -9,7 +9,8 @@ import { Search } from '../Dtos/Search';
   providedIn: 'root'
 })
 export class BookService {
-  private serverUrl = environment.apiBaseUrl
+  private serverUrl = environment.apiBaseUrl;
+  private book?: Book;
   constructor(private http: HttpClient) { }
   public getFavorites(id: number): Observable<Book[]>{
     return this.http.get<Book[]>(this.serverUrl+'/User/Favorites/'+id);
@@ -40,5 +41,11 @@ public getBookImage(id: number): Observable<HttpResponse<Blob>>{
 }
 public getBooksByGenre(genreid: number): Observable<Book[]>{
   return this.http.get<Book[]>(this.serverUrl+'/Book/Genre/'+genreid);
+}
+public setBook(book: Book){
+  this.book = book;
+}
+public getBook(): Book{
+  return this.book!;
 }
 }

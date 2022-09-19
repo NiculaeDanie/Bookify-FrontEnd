@@ -23,6 +23,7 @@ export class BookComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
    }
   ngOnInit(): void {
+    console.log(this.bookService.getBook());
     this.bookid = Number(this.route.snapshot.paramMap.get('id')!);
     this.getBookById(this.bookid!,2);
   }

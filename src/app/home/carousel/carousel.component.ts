@@ -145,5 +145,7 @@ export class CarouselComponent implements OnInit {
       });
         return result.slice(0,-1);
       }
-
+      saveBook(book: Book){
+        this.bookService.setBook(book);
+      }
 }
