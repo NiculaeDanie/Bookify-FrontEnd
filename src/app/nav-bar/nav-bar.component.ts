@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { BookifyService } from '../bookify.service';
 import { Search } from '../Dtos/Search';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Output, EventEmitter } from '@angular/core';
 import { Book } from '../Dtos/Book';
-import { outputAst } from '@angular/compiler';
+import { BookService } from '../services/book.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -16,7 +15,7 @@ export class NavBarComponent implements OnInit {
   book?: Book;
   @Output() bookemit = new EventEmitter<number>();
   @Output() authoremit = new EventEmitter<number>();
-  constructor(private bookService: BookifyService) { }
+  constructor(private bookService: BookService) { }
 
   ngOnInit(): void {
     

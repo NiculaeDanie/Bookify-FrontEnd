@@ -1,10 +1,10 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BookifyService } from '../bookify.service';
 import { Book } from '../Dtos/Book';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { BookService } from '../services/book.service';
 
 @Component({
   selector: 'app-book',
@@ -15,7 +15,7 @@ export class BookComponent implements OnInit {
   bookid?: number;
   book?: Book;
   file?: SafeResourceUrl;
-  constructor(private bookService: BookifyService,
+  constructor(private bookService: BookService,
     private route: ActivatedRoute,
   private router: Router,
   public sanitizer: DomSanitizer

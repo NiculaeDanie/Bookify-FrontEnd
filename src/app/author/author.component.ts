@@ -1,9 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BookifyService } from '../bookify.service';
 import { Author } from '../Dtos/Author';
 import { Genre } from '../Dtos/Genre';
+import { AuthorService } from '../services/author.service';
 
 @Component({
   selector: 'app-author',
@@ -14,7 +14,7 @@ export class AuthorComponent implements OnInit {
   authorid?: number;
   author?: Author;
   genre?: Genre ;
-  constructor(private bookService: BookifyService,
+  constructor(private authorService: AuthorService,
     private route: ActivatedRoute,
   private router: Router
   ) {
@@ -28,7 +28,7 @@ export class AuthorComponent implements OnInit {
   }
 
   getAuthorById(authorid: number): void{
-    this.bookService.getAuthorById(authorid).subscribe(
+    this.authorService.getAuthorById(authorid).subscribe(
       (Response: Author)=>{
         this.author=Response; 
         console.log(Response);

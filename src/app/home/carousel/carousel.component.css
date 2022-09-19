@@ -20,6 +20,7 @@
     filter: invert(100%);
 }
 .card{
+  max-width: 230px;
     margin: 5px;
     background-color: #B1D7B4;
 }
@@ -28,6 +29,7 @@
   height: 100%;
 }
 .card-body{
+  
   padding-top: 1;
   display: none;
 }

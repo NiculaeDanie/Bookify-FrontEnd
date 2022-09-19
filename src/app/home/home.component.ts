@@ -1,9 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { BookifyService } from '../bookify.service';;
 import { Genre } from '../Dtos/Genre';
 import { User } from '../Dtos/User';
-import { CarouselComponent } from './carousel/carousel.component';
+import { GenreService } from '../services/genre.service';
 declare var $: any;
 
 @Component({
@@ -17,7 +16,7 @@ export class HomeComponent implements OnInit {
   user?: User = {id: 2 , name: 'test' , email:'test'};
 
 
-  constructor(private bookService: BookifyService){
+  constructor(private genreService: GenreService){
   }
   ngOnInit(){
     this.getGenres();
@@ -25,7 +24,7 @@ export class HomeComponent implements OnInit {
 
     
   public getGenres(): void{
-      this.bookService.getGenres().subscribe(
+      this.genreService.getGenres().subscribe(
         (Response: Genre[])=>{
           this.genres=Response;
           if(this.user!=null){
@@ -38,12 +37,5 @@ export class HomeComponent implements OnInit {
         }
       )
     }
-  @ViewChildren(CarouselComponent) child!: CarouselComponent;
-  ngAfterViewInit() {
-    console.log(this.child!);
-  }
-  public getId(id: number){
-    alert(id);
-  }
   
 }

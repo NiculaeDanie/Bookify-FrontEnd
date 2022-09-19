@@ -1,9 +1,9 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { BookifyService } from '../../bookify.service';
 import { Book } from '../../Dtos/Book';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BookService } from 'src/app/services/book.service';
 declare var $: any;
 @Component({
   selector: 'app-pdf',
@@ -15,7 +15,7 @@ export class PdfComponent implements OnInit {
   book?: Book;
   file?: SafeResourceUrl;
   
-  constructor(private bookService: BookifyService,
+  constructor(private bookService: BookService,
     private route: ActivatedRoute,
   private router: Router,
   private sanitizer: DomSanitizer

@@ -1,10 +1,10 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
-import { BookifyService } from '../../bookify.service';
 import { Book } from '../../Dtos/Book';
 import { Genre } from '../../Dtos/Genre';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { BookService } from 'src/app/services/book.service';
 declare var $: any;
 @Component({
   selector: 'app-carousel',
@@ -32,7 +32,7 @@ export class CarouselComponent implements OnInit {
     }
     this.slides = this.chunk(this.books,this.visibleDays);
   }
-  constructor(private bookService: BookifyService, public sanitizer: DomSanitizer) { }
+  constructor(private bookService: BookService, public sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     if(this.genre.name == 'Favorites'){
@@ -145,8 +145,5 @@ export class CarouselComponent implements OnInit {
       });
         return result.slice(0,-1);
       }
-    public emitId(id: number){
-      this.id.emit(id);
-    }
 
 }

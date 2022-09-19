@@ -1,14 +1,14 @@
 <div class="row pad">
-    <div class="col-lg-4 col-md-5 col-sm-12">
+    <div class="col-lg-4 col-md-5 col-sm-12 we">
       <img class="image" [src]="this.file"/>
     </div>
-    <div class="col-lg-8 col-md-7 col-sm-12 padr">
-      <h1>{{book?.title}}</h1>
+    <div class="col-lg-8 col-md-7 col-sm-12 p-3 center-block text-center">
+      <h1><strong>{{book?.title}}</strong></h1>
 
-         <p>Authors: {{getAuthors(book)}}</p><br>
-         <p>Genres: {{getGenres(book)}}</p><br>
-         <p>Release Date: {{book!.releaseDate | date:'shortDate'}}</p>
-         <p>Summary: {{book?.description}}</p>
+         <p><strong>Authors:</strong> {{getAuthors(book)}}</p><br>
+         <p><strong>Genres:</strong> {{getGenres(book)}}</p><br>
+         <p><strong>Release Date:</strong> {{book!.releaseDate | date:'shortDate'}}</p>
+         <p><strong>Summary:</strong> {{book?.description}}</p>
         <div class="container">
           <button [routerLink]="['/book',this.bookid,'content']" class="btn btn-primary">Read Book</button>
 
