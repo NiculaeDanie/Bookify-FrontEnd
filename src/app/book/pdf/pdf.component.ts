@@ -4,6 +4,7 @@ import { Book } from '../../Dtos/Book';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from 'src/app/services/book.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 declare var $: any;
 @Component({
   selector: 'app-pdf',
@@ -18,18 +19,19 @@ export class PdfComponent implements OnInit {
   constructor(private bookService: BookService,
     private route: ActivatedRoute,
   private router: Router,
-  private sanitizer: DomSanitizer
+  private sanitizer: DomSanitizer,
+  private auth: AuthenticationService,
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
    }
    ngOnInit(): void {
     this.bookid = Number(this.route.snapshot.paramMap.get('id')!);
-    this.getBookById(this.bookid!,2);
-    this.getBookContent(this.bookid,2);
+    this.getBookById(this.bookid!);
+    this.getBookContent(this.bookid);
    }
 
-  public getBookById(bookid: number,userid: number): void{
-    this.bookService.getBookById(bookid,userid).subscribe(
+  public getBookById(bookid: number): void{
+    this.bookService.getBookById(bookid,this.auth.getEmail()).subscribe(
       (Response: Book)=>{
         this.book=Response; 
       },
@@ -38,8 +40,8 @@ export class PdfComponent implements OnInit {
       }
     )
   }
-  public getBookContent(bookid: number,userid:number):void{
-    this.bookService.getBookContent(bookid,userid).subscribe(
+  public getBookContent(bookid: number):void{
+    this.bookService.getBookContent(bookid,this.auth.getEmail()).subscribe(
       (Response: HttpResponse<Blob>)=>{
         this.file = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(Response.body!));        
       },

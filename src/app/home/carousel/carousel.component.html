@@ -1,27 +1,29 @@
 <div *ngIf="books.length!=0">
-<h1 class="m-2 pl-4">{{genre.name | title}}</h1>
+<h1 class="m-2 title">{{genre.name | title}}</h1>
 <div id="carouselExampleControls{{genre.name}}" class="carousel slide" data-interval="false" data-ride="carousel" data-pause="hover">
     <div class="carousel-inner">
             <div class="carousel-item active">
                 <div class="row justify-content-center m-0">
-                    <div [routerLink]="['/book',card.id]" (click)="saveBook(card)"  class="card col-xs-3 col-sm-3 col-md-3 col-lg-2 p-0" *ngFor="let card of slides[0]">
-                        <img class="card-image card-image-top" [src]="map.get(card.id)"/>
-                        <div class="card-body p-0 pl-1">
-                            <strong>{{card.title}}</strong>
-                            <p>Authors: {{getAuthors(card)}} <br>Genres: {{getGenres(card)}}</p>
-                        </div>
-                    </div>
+                        <mat-card [routerLink]="['/book',card.id]" class="card" class="card col-xs-3 col-sm-3 col-md-3 col-lg-2 p-0" *ngFor="let card of slides[0]">
+                            <img mat-card-image id="img{{card.title}}"  [src]="map.get(card.id)" >
+                            <mat-card-content class="pt-2 d-flex align-items-center flex-column" id="content{{card.title}}">
+                                <mat-card-title>{{card.title}}</mat-card-title>
+                              <mat-card-subtitle>{{getGenres(card)}}</mat-card-subtitle>
+                              <p class="pt-3">Authors: {{getAuthors(card)}}</p>
+                        </mat-card-content>
+                          </mat-card> 
                 </div>
             </div>
             <div *ngFor="let item of slides.slice(1)" class="carousel-item">
                 <div class="row justify-content-center m-0">
-                    <div [routerLink]="['/book',card.id]" (click)="saveBook(card)" class="card col-xs-3 col-sm-3 col-md-3 col-lg-2 p-0" *ngFor="let card of item">
-                        <div class="card-header p-0"><img class="card-image" [src]="map.get(card.id)" /></div>
-                        <div class="card-body">
-                            <strong>{{card.title}}</strong>
-                            <p>Authors: {{getAuthors(card)}} <br>Genres: {{getGenres(card)}}</p>
-                        </div>
-                    </div>
+                    <mat-card [routerLink]="['/book',card.id]" class="card" class="card col-xs-3 col-sm-3 col-md-3 col-lg-2 p-0" *ngFor="let card of item">
+                        <img mat-card-image [src]="map.get(card.id)" alt="{{card.title}}">
+                        <mat-card-content class="pt-2 d-flex align-items-center flex-column" id="content{{card.title}}">
+                            <mat-card-title>{{card.title}}</mat-card-title>
+                          <mat-card-subtitle>{{getGenres(card)}}</mat-card-subtitle>
+                            <p class="pt-3">Authors: {{getAuthors(card)}}</p>
+                    </mat-card-content>
+                      </mat-card> 
                 </div>
             </div>
         </div>

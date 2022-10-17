@@ -1,0 +1,109 @@
+<mat-card class="container">
+    <mat-card-header>
+      <mat-card-title>{{this.name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form *ngIf="bookForm" [formGroup]="bookForm!" (ngSubmit)="submit()" class="container d-flex flex-column justify-content-center">
+            <div >
+                <mat-form-field appearance="outline">
+                    <mat-label>Title</mat-label>
+                    <input
+                    formControlName="Title"
+                    type="text"
+                    matInput>
+                  </mat-form-field>
+                  <div *ngIf="f.Title.touched && f.Title.invalid" class="alert alert-danger">
+                    <p>Title is required</p>
+                </div> 
+            </div>
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <textarea 
+                    formControlName="Description"
+                    type="text"
+                    matInput></textarea>
+                  </mat-form-field>
+                  <div *ngIf="f.Description.touched && f.Description.invalid" class="alert alert-danger">
+                    <p>Description is required</p>
+                </div>
+            </div>
+            <div >
+                <mat-form-field appearance="outline">
+                    <mat-label>Release Date</mat-label>
+                    <input 
+                    formControlName="ReleaseDate"
+                    matInput [matDatepicker]="picker">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                  <div *ngIf="f.ReleaseDate.touched && f.ReleaseDate.invalid" class="alert alert-danger">
+                    <p>Date is required</p>
+                </div>
+            </div>
+            <mat-form-field appearance="outline">
+              <mat-label>Book content</mat-label>
+              <ngx-mat-file-input 
+              formControlName="Content"
+              >
+                <mat-icon ngxMatFileInputIcon>folder</mat-icon>
+              </ngx-mat-file-input>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Book image</mat-label>
+              <ngx-mat-file-input formControlName="Image">
+                <mat-icon ngxMatFileInputIcon>folder</mat-icon>
+              </ngx-mat-file-input>
+            </mat-form-field>
+            <div class="pt-2">
+              <h3>Authors:</h3>
+              <div *ngFor="let author of authors; let i = index" [attr.data-index]="i">
+                <h4 class="d-inline pr-2" [routerLink]="['/author',author.id]">{{i+1}}. {{author.name}}</h4>
+                 <mat-icon (click)="remove(author)">delete_outline</mat-icon>
+              </div>
+              <mat-form-field  class="example-full-width" appearance="outline">
+                <input (input)="Search($event)" type="text" id="search" name="search" #s
+                       placeholder="Search"
+                       matInput
+                       [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option (click)="select(option.id)" *ngFor="let option of search" [value]="option.title">
+                    <a>{{option.title}}</a>
+                  </mat-option>
+                  <mat-option>
+                    <a (click)="openDialog()" style="color:green">Add new author</a>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div class="pt-2">
+              <h3>Genres:</h3>
+              <div *ngFor="let genre of genres; let i = index" [attr.data-index]="i">
+                <h4 class="d-inline pr-2">{{i+1}}. {{genre.name}}</h4>
+                 <mat-icon (click)="removeGenre(genre)">delete_outline</mat-icon>
+              </div>
+              <mat-form-field  class="example-full-width" appearance="outline">
+                <input (input)="SearchGenre($event)" type="text" id="genre" name="genre" #g
+                       placeholder="Search"
+                       matInput
+                       [matAutocomplete]="aut">
+                <mat-autocomplete #aut="matAutocomplete">
+                  <mat-option (click)="selectGenre(option.id)" *ngFor="let option of genreSearch" [value]="option.name">
+                    <a>{{option.name}}</a>
+                  </mat-option>
+                  <mat-option>
+                    <a (click)="openDialogGenre()" style="color:green">Add new genre</a>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <mat-card-actions>
+              <button mat-button color="primary" type="submit" [disabled]="!bookForm.valid">SAVE</button>
+        
+            </mat-card-actions>
+        </form>
+      </mat-card-content>
+  </mat-card>
+
+

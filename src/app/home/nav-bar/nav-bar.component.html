@@ -1,0 +1,28 @@
+
+<mat-toolbar>
+  <div class="collapse d-flex justify-content-between  navbar-collapse pt-2" id="navbarSupportedContent">
+    <a class="navbar-brand" [routerLink]="['/home']">Bookify</a>
+    
+
+  
+      <mat-form-field (keyup.enter)="route(search[0])"  class="example-full-width" style="width:30vw " >
+        <input (input)="Search($event)" type="text" id="search" name="search" #s
+               placeholder="Search"
+               matInput
+               [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option [routerLink]="['/',option.type.toLowerCase(),option.id]" *ngFor="let option of search" [value]="option.title">
+            <a>{{option.title}}</a>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+<mat-menu #menu="matMenu">
+  <button  *ngIf="isAdmin()" [routerLink]="['/add-book']" mat-menu-item>Add Book</button>
+  <button  *ngIf="isAdmin()" [routerLink]="['/statistics']" mat-menu-item>Statistics</button>
+  <button (click)="logOut()"  mat-menu-item>Log Out</button>
+</mat-menu>
+      
+  </div>
+  
+</mat-toolbar>

@@ -1,0 +1,26 @@
+mat-form-field {
+
+      width: 10%;
+  }
+
+  div.mat-form-field-prefix {
+      padding-right: 12px !important;
+  }
+
+  mat-toolbar{ background-color: #7ad34e;
+    position: absolute;
+    background-color:transparent;}
+
+.navbar-brand{
+  color: #7ad34e;
+  font-size: 30px;
+}
+mat-auto-complete{
+  z-index: 1;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: white;
+  border-radius: 5px;
+}
+

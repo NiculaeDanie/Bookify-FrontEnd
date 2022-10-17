@@ -1,6 +1,8 @@
-embed{
+object{
     height: 100%;
+    min-height: 650px;
 }
 #my-container{
     height: 87%;
+    min-height: 800px;
 }

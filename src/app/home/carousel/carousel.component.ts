@@ -5,6 +5,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { BookService } from 'src/app/services/book.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 declare var $: any;
 @Component({
   selector: 'app-carousel',
@@ -22,25 +23,25 @@ export class CarouselComponent implements OnInit {
   @HostListener("window:resize", []) updateDays() {
     $("#carouselExampleControls"+this.genre.name).carousel(0);
     if (window.innerWidth >= 1200) {
-      this.visibleDays = 5; // lg
+      this.visibleDays = 4; // lg
     } else if (window.innerWidth >= 992) {
-      this.visibleDays = 4;//md
+      this.visibleDays = 3;//md
     } else if (window.innerWidth  >= 768) {
-      this.visibleDays = 3;//sm
+      this.visibleDays = 2;//sm
     } else if (window.innerWidth < 768) {
-      this.visibleDays = 2;//xs
+      this.visibleDays = 1//xs
     }
     this.slides = this.chunk(this.books,this.visibleDays);
   }
-  constructor(private bookService: BookService, public sanitizer: DomSanitizer) { }
+  constructor(private bookService: BookService, public sanitizer: DomSanitizer, private auth: AuthenticationService) { }
 
   ngOnInit(): void {
     if(this.genre.name == 'Favorites'){
-      this.getFavorites(this.genre.id);
+      this.getFavorites();
     }
     else{
       if(this.genre.name == 'YourHistory'){
-        this.getHistory(this.genre.id);
+        this.getHistory();
       }
       else{
         if(this.genre.name == 'Books')
@@ -82,8 +83,8 @@ export class CarouselComponent implements OnInit {
       }
     )
   }
-  public getFavorites(id: number): void{
-    this.bookService.getFavorites(id).subscribe(
+  public getFavorites(): void{
+    this.bookService.getFavorites(this.auth.getEmail()).subscribe(
       (Response: Book[])=>{
         this.books=Response;
         this.books.forEach(element => {
@@ -96,8 +97,8 @@ export class CarouselComponent implements OnInit {
       }
     )
   }
-  public getHistory(id: number): void{
-    this.bookService.getHistory(id).subscribe(
+  public getHistory(): void{
+    this.bookService.getHistory(this.auth.getEmail()).subscribe(
       (Response: Book[])=>{
         this.books=Response;
         this.books.forEach(element => {
@@ -145,7 +146,9 @@ export class CarouselComponent implements OnInit {
       });
         return result.slice(0,-1);
       }
-      saveBook(book: Book){
-        this.bookService.setBook(book);
+      display(el: string){
+        $('img'+el).style.display="none";
+        $('content'+el).style.display="block";
       }
+
 }

@@ -28,8 +28,8 @@ export class HomeComponent implements OnInit {
         (Response: Genre[])=>{
           this.genres=Response;
           if(this.user!=null){
-            this.genres = [{ id : this.user.id , name : "YourHistory"}].concat(this.genres);
-            this.genres = [{ id : this.user.id , name : "Favorites"}].concat(this.genres);
+            this.genres = [{ id : this.user.id! , name : "YourHistory"}].concat(this.genres);
+            this.genres = [{ id : this.user.id! , name : "Favorites"}].concat(this.genres);
           } 
         },
         (error: HttpErrorResponse) => {

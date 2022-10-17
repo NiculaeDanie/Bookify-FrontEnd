@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { BookService } from '../services/book.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-book',
@@ -18,16 +19,29 @@ export class BookComponent implements OnInit {
   constructor(private bookService: BookService,
     private route: ActivatedRoute,
   private router: Router,
-  public sanitizer: DomSanitizer
+  public sanitizer: DomSanitizer,
+  private auth: AuthenticationService
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
    }
   ngOnInit(): void {
-    console.log(this.bookService.getBook());
     this.bookid = Number(this.route.snapshot.paramMap.get('id')!);
-    this.getBookById(this.bookid!,2);
+    this.getBookById(this.bookid!);
   }
-
+  public isAdmin()
+  {
+    return this.auth.isAdmin();
+  }
+  public deleteBook(){
+    this.bookService.deleteBook(this.bookid!).subscribe(
+      (Response: any)=>{
+        this.router.navigate(['/home']);
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error);
+      }
+    );
+  }
   getGenres(book?: Book): string{
     if(book== null){
       return '';
@@ -51,8 +65,8 @@ export class BookComponent implements OnInit {
       });
         return result.slice(0,-1);
       }
-      public getBookById(bookid: number,userid: number): void{
-        this.bookService.getBookById(bookid,userid).subscribe(
+      public getBookById(bookid: number): void{
+        this.bookService.getBookById(bookid,this.auth.getEmail()).subscribe(
           (Response: Book)=>{
             this.book=Response; 
             console.log(Response);
@@ -65,10 +79,10 @@ export class BookComponent implements OnInit {
         )
       }
       public addBookToFavorites(): void{
-        this.bookService.addToFavorites(2,this.bookid!).subscribe(
+        this.bookService.addToFavorites(this.auth.getEmail(),this.bookid!).subscribe(
           (Response: Book)=>{
             this.book=Response; 
-            this.getBookById(this.bookid!,2);
+            this.getBookById(this.bookid!);
             
           },
           (error: HttpErrorResponse) => {
@@ -77,9 +91,9 @@ export class BookComponent implements OnInit {
         )
       }
       public removeBookFromFavorites(): void{
-        this.bookService.removeFromFavorites(2,this.bookid!).subscribe(
+        this.bookService.removeFromFavorites(this.auth.getEmail(),this.bookid!).subscribe(
           (Response: Book)=>{
-            this.getBookById(this.bookid!,2);
+            this.getBookById(this.bookid!);
             
           },
           (error: HttpErrorResponse) => {

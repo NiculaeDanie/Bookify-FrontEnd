@@ -11,7 +11,8 @@
          <p><strong>Summary:</strong> {{book?.description}}</p>
         <div class="container">
           <button [routerLink]="['/book',this.bookid,'content']" class="btn btn-primary">Read Book</button>
-
+          <button *ngIf="isAdmin()" [routerLink]="['/update-book',this.bookid]" class="btn btn-primary">Edit Book</button>
+          <button *ngIf="isAdmin()" (click)="deleteBook()" class="btn btn-danger">Delete Book</button>
           <div *ngIf="!book?.isFavorited">
             <button (click)="addBookToFavorites()" class="btn btn-secondary">Add Book to Favorites</button>
           </div>

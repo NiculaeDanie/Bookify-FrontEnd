@@ -13,4 +13,10 @@ export class GenreService {
   public getGenres(): Observable<Genre[]>{
     return this.http.get<Genre[]>(this.serverUrl+'/Genre');
   }
+  public getById(id: number): Observable<Genre>{
+    return this.http.get<Genre>(this.serverUrl+'/Genre/'+id);
+  }
+  public add(book: FormData): Observable<Genre>{
+    return this.http.post<Genre>(this.serverUrl+'/Genre',book);
+  }
 }
